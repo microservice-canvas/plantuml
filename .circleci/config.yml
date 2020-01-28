@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    working_directory: ~/plantuml
+    steps:
+      - checkout
+      - run: TERM=dumb ./build-docker.sh
+      - run:
+          name: Publish artifacts
+          command: |
+            TERM=dumb ./deploy-artifacts.sh
+          when: on_success
