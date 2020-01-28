@@ -1,7 +1,7 @@
 
 # PlantUML
 
-[Plantuml] is a super useful, text-based UML diagraming tool.
+https://plantuml.com[Plantuml] is a super useful, text-based UML diagraming tool.
 
 This Docker image is a convenient way to run PlantUML.
 
