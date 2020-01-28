@@ -20,5 +20,5 @@ VERSION=$BRANCH
 
 docker login -u ${DOCKER_USER_ID?} -p ${DOCKER_PASSWORD?}
 
-docker tag plantuml-local:latest microservicesio/plantuml:$VERSION
+docker tag plantuml:latest microservicesio/plantuml:$VERSION
 docker push microservicesio/plantuml:$VERSION
