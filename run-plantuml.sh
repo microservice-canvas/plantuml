@@ -1,12 +1,12 @@
 #! /bin/bash -e
 
-cat > foo.txt && java -jar *.jar  -Djava.awt.headless=true foo.txt
+cat > input.txt && java -jar *.jar  -Djava.awt.headless=true input.txt
 
 if [ -z "$LEGEND" ] ; then
-  cat foo.png
+  cat output.png
   exit 0
 fi
 
-convert -append foo.png ./legends/$LEGEND.png out.png
+convert -append output.png ./legends/$LEGEND.png out.png
 
 cat out.png
