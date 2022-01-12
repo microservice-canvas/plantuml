@@ -16,7 +16,7 @@ fi
 
 docker login -u ${DOCKER_USER_ID?} -p ${DOCKER_PASSWORD?}
 
-TEST_IMAGE=microservicesio/plantuml:test-build-${CIRCLE_BUILD_NUM?}
+TEST_IMAGE=microservicesio/plantuml:test-build-${CIRCLE_SHA1?}
 IMAGE=microservicesio/plantuml:$VERSION
 
 echo Pushing image
