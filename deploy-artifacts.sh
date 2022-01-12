@@ -16,5 +16,11 @@ fi
 
 docker login -u ${DOCKER_USER_ID?} -p ${DOCKER_PASSWORD?}
 
-docker tag plantuml:latest microservicesio/plantuml:$VERSION
-docker push microservicesio/plantuml:$VERSION
+TEST_IMAGE=microservicesio/plantuml:test-build-${CIRCLE_BUILD_NUM?}
+IMAGE=microservicesio/plantuml:$VERSION
+
+echo Pushing image
+
+docker pull ${TEST_IMAGE}
+docker tag ${TEST_IMAGE} $IMAGE
+docker push $IMAGE

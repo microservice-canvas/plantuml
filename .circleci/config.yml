@@ -1,13 +1,51 @@
-version: 2
+version: 2.1
 jobs:
   build:
     machine: true
+      image: ubuntu-2004:202010-01
     working_directory: ~/plantuml
     steps:
       - checkout
-      - run: ./build-and-test-docker.sh
+      - run: ./build-and-push-docker.sh
+  test-intel:
+    machine: true
+      image: ubuntu-2004:202010-01
+    working_directory: ~/plantuml
+    steps:
+      - checkout
+      - run: ./test-docker.sh
+  test-arm64:
+    machine: true
+      image: ubuntu-2004:202010-01
+      resource_class: arm.medium
+    working_directory: ~/plantuml
+    steps:
+      - checkout
+      - run: ./build-and-push-docker.sh
+  deploy:
+    machine: true
+      image: ubuntu-2004:202010-01
+      resource_class: arm.medium
+    working_directory: ~/plantuml
+    steps:
+      - checkout
       - run:
           name: Publish artifacts
           command: |
             TERM=dumb ./deploy-artifacts.sh
           when: on_success
+workflows:
+  version: 2.1
+  build-test-and-deploy:
+    jobs:
+      - build
+      - test-intel:
+        requires:
+          build
+      - test-arm64:
+        requires:
+          build
+      - deploy:
+        requires:
+          - test-intel
+          - test-arm64
