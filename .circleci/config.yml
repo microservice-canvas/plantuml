@@ -14,7 +14,7 @@ jobs:
           command: |
             which jq || echo jq not found
             sudo apt-get update
-            sudo apt-get install jq
+            sudo apt-get install -y jq
       - run:
           name: Install buildx
           command: |

@@ -21,7 +21,7 @@ IMAGE=microservicesio/plantuml:$VERSION
 echo Pushing image
 
 sudo apt-get update
-sudo apt-get install jq
+sudo apt-get install -y jq
 
 SRC_TAG=test-build-${CIRCLE_SHA1?}
 
