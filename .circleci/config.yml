@@ -40,12 +40,12 @@ workflows:
     jobs:
       - build
       - test-intel:
-        requires:
-          build
+          requires:
+            - build
       - test-arm64:
-        requires:
-          build
+          requires:
+            - build
       - deploy:
-        requires:
-          - test-intel
-          - test-arm64
+          requires:
+            - test-intel
+            - test-arm64
