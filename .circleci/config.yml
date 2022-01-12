@@ -12,6 +12,8 @@ jobs:
       - run:
           name: Install buildx
           command: |
+            # https://circleci.com/blog/building-docker-images-for-multiple-os-architectures/
+            
             BUILDX_BINARY_URL="https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-amd64"
 
             curl --output docker-buildx \
@@ -26,6 +28,8 @@ jobs:
             docker buildx install
             # Run binfmt
             docker run --rm --privileged tonistiigi/binfmt:latest --install "$BUILDX_PLATFORMS"
+            # Need this to prevent: error: multiple platforms feature is currently not supported for docker driver. Please switch to a different driver (eg. "docker buildx create --use")
+            docker buildx create --use
       - run: ./build-and-push-docker.sh
   test-intel:
     machine:
