@@ -2,21 +2,17 @@
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-if ! [[  $BRANCH =~ ^[0-9]+ ]] ; then
-  echo Not release $BRANCH - no PUSH
-  exit 0
+if [[  $BRANCH == "master" ]] ; then
+  VERSION=BUILD-${CIRCLE_BUILD_NUM?}
 elif [[  $BRANCH =~ RELEASE$ ]] ; then
-  BINTRAY_REPO_TYPE=release
+  VERSION=$BRANCH
 elif [[  $BRANCH =~ M[0-9]+$ ]] ; then
-    BINTRAY_REPO_TYPE=milestone
+  VERSION=$BRANCH
 elif [[  $BRANCH =~ RC[0-9]+$ ]] ; then
-    BINTRAY_REPO_TYPE=rc
+  VERSION=$BRANCH
 else
-  echo cannot figure out bintray for this branch $BRANCH
-  exit -1
+  VERSION=${BRANCH}-${CIRCLE_BUILD_NUM?}
 fi
-
-VERSION=$BRANCH
 
 docker login -u ${DOCKER_USER_ID?} -p ${DOCKER_PASSWORD?}
 

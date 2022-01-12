@@ -5,7 +5,7 @@ jobs:
     working_directory: ~/plantuml
     steps:
       - checkout
-      - run: TERM=dumb ./build-docker.sh
+      - run: ./build-and-test-docker.sh
       - run:
           name: Publish artifacts
           command: |
