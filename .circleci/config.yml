@@ -1,21 +1,21 @@
 version: 2.1
 jobs:
   build:
-    machine: true
+    machine:
       image: ubuntu-2004:202010-01
     working_directory: ~/plantuml
     steps:
       - checkout
       - run: ./build-and-push-docker.sh
   test-intel:
-    machine: true
+    machine:
       image: ubuntu-2004:202010-01
     working_directory: ~/plantuml
     steps:
       - checkout
       - run: ./test-docker.sh
   test-arm64:
-    machine: true
+    machine:
       image: ubuntu-2004:202010-01
       resource_class: arm.medium
     working_directory: ~/plantuml
@@ -23,7 +23,7 @@ jobs:
       - checkout
       - run: ./build-and-push-docker.sh
   deploy:
-    machine: true
+    machine:
       image: ubuntu-2004:202010-01
       resource_class: arm.medium
     working_directory: ~/plantuml
