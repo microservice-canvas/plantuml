@@ -13,7 +13,7 @@ jobs:
           name: Install buildx
           command: |
             # https://circleci.com/blog/building-docker-images-for-multiple-os-architectures/
-            
+
             BUILDX_BINARY_URL="https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-amd64"
 
             curl --output docker-buildx \
@@ -40,7 +40,7 @@ jobs:
       - run: ./test-docker.sh
   test-arm64:
     machine:
-      image: ubuntu-2004:202010-01
+      image: ubuntu-2004:202101-01
       resource_class: arm.medium
     working_directory: ~/plantuml
     steps:
