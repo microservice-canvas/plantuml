@@ -10,6 +10,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install jq
+          command: |
+            which jq || echo jq not found
+            sudo apt-get update
+            sudo apt-get install jq
+      - run:
           name: Install buildx
           command: |
             # https://circleci.com/blog/building-docker-images-for-multiple-os-architectures/

@@ -16,11 +16,16 @@ fi
 
 docker login -u ${DOCKER_USER_ID?} -p ${DOCKER_PASSWORD?}
 
-TEST_IMAGE=microservicesio/plantuml:test-build-${CIRCLE_SHA1?}
 IMAGE=microservicesio/plantuml:$VERSION
 
 echo Pushing image
 
-docker pull ${TEST_IMAGE}
-docker tag ${TEST_IMAGE} $IMAGE
-docker push $IMAGE
+sudo apt-get update
+sudo apt-get install jq
+
+SRC_TAG=test-build-${CIRCLE_SHA1?}
+
+docker manifest create ${IMAGE} \
+  $(docker manifest inspect docker.io/microservicesio/plantuml:${SRC_TAG}| jq -r '.manifests[].digest' | xargs -n1 -I XYZ echo microservicesio/plantuml@XYZ)
+
+docker manifest push ${IMAGE}
