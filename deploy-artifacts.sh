@@ -25,6 +25,10 @@ sudo apt-get install -y jq
 
 SRC_TAG=test-build-${CIRCLE_SHA1?}
 
+# docker manifest inspect is only supported on a Docker cli with experimental cli features enabled
+
+export DOCKER_CLI_EXPERIMENTAL=enabled
+
 docker manifest create ${IMAGE} \
   $(docker manifest inspect docker.io/microservicesio/plantuml:${SRC_TAG}| jq -r '.manifests[].digest' | xargs -n1 -I XYZ echo microservicesio/plantuml@XYZ)
 
