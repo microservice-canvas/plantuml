@@ -45,7 +45,7 @@ jobs:
     working_directory: ~/plantuml
     steps:
       - checkout
-      - run: ./build-and-push-docker.sh
+      - run: ./test-docker.sh
   deploy:
     machine:
       image: ubuntu-2004:202010-01
