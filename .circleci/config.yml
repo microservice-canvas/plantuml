@@ -49,7 +49,6 @@ jobs:
   deploy:
     machine:
       image: ubuntu-2004:202010-01
-      resource_class: arm.medium
     working_directory: ~/plantuml
     steps:
       - checkout
