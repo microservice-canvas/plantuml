@@ -47,11 +47,17 @@ jobs:
             docker buildx create --use
       - run: ./build-and-push-docker.sh
   test-intel:
-    machine:
-      image: ubuntu-2004:202010-01
+    docker:
+      - image: cimg/base:stable
     working_directory: ~/plantuml
+    environment:
+      XX_DOCKER_BUILDKIT: 1
+      XX_BUILDX_PLATFORMS: linux/amd64,linux/arm64
+      XX_DOCKER_CLI_EXPERIMENTAL: enabled
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.11
       - run: ./test-docker.sh
   test-arm64:
     machine:
@@ -62,11 +68,17 @@ jobs:
       - checkout
       - run: ./test-docker.sh
   deploy:
-    machine:
-      image: ubuntu-2004:202010-01
+    docker:
+      - image: cimg/base:stable
     working_directory: ~/plantuml
+    environment:
+      XX_DOCKER_BUILDKIT: 1
+      XX_BUILDX_PLATFORMS: linux/amd64,linux/arm64
+      XX_DOCKER_CLI_EXPERIMENTAL: enabled
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.11
       - run:
           name: Publish artifacts
           command: |
