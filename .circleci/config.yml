@@ -19,6 +19,7 @@ jobs:
             docker version
             docker buildx
             #docker manifest list
+            docker buildx create --use
             exit 0
 
             # https://circleci.com/blog/building-docker-images-for-multiple-os-architectures/
