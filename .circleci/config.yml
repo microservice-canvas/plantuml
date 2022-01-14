@@ -19,7 +19,12 @@ jobs:
             docker version
             docker buildx
             #docker manifest list
-            docker buildx create --use
+
+            # error: could not create a builder instance with TLS data loaded from environment. Please use `docker context create <context-name>` to create a context for current environment and then create a builder instance with `docker buildx create <context-name>`
+
+            docker context ls
+            #docker context create tls-env
+            #docker buildx create tls-env --use
             exit 0
 
             # https://circleci.com/blog/building-docker-images-for-multiple-os-architectures/
