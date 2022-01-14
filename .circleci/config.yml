@@ -18,8 +18,8 @@ jobs:
             # https://support.circleci.com/hc/en-us/articles/360058095471-How-To-Use-Docker-Buildx-in-Remote-Docker-
             docker version
             docker buildx
-            docker manifest list
-            exit 0
+            #docker manifest list
+            #exit 0
 
             # https://circleci.com/blog/building-docker-images-for-multiple-os-architectures/
 
