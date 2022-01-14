@@ -1,10 +1,13 @@
 version: 2
 jobs:
   build:
-    machine: true
+    docker:
+      - image: cimg/base:stable
     working_directory: ~/plantuml
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.11
       - run: ./build-and-test-docker.sh
       - run:
           name: Publish artifacts
