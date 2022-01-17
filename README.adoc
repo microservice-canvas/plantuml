@@ -8,6 +8,9 @@ This Docker image is a convenient way to run PlantUML.
 For example, in a Makefile you can write:
 
 ```
+%.pdf : %.adoc
+  asciidoctor -r asciidoctor-pdf -b pdf -o $@ $<
+
 %.png : %.txt
-	docker run --rm --net=none -e UML_DIAGRAM=$< -v `pwd`:/diagrams microservicesio/plantuml:0.1.0.RELEASE
+   docker run -i --rm --net=none microservicesio/plantuml:0.2.0.RELEASE < $< > $@
 ```
