@@ -1,0 +1,10 @@
+#! /bin/bash -e
+
+# For some reason, picking a random port does not seem reliable (on M1 MacBook)
+
+version: '3'
+services:
+  registry:
+    image: registry:2
+    ports:
+      - "5002:5000"
