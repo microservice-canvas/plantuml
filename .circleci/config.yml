@@ -27,7 +27,7 @@ jobs:
           docker context create tls-env
           docker buildx create tls-env --use
           #
-          ./build-and-test-multi-arch-locally.sh
+          ./build-and-test-multi-arch-circleci.sh
       - run: ./build-and-test-docker.sh
       - run:
           name: Publish artifacts
