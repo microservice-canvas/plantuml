@@ -8,6 +8,12 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.11
+      - run:
+          name: docker buildx build
+          command: |
+            docker context create tls-env
+            docker buildx create tls-env --use
+            ./build-and-test-multi-arch-circleci.sh
       - run: ./build-and-test-docker.sh
       - run:
           name: Publish artifacts
