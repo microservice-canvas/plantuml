@@ -1,5 +1,8 @@
 @startuml
 digraph foo {
+
+  'From https://plantuml.com/dot
+
   node [style=rounded]
   node1 [shape=box]
   node2 [fillcolor=yellow, style="rounded,filled", shape=diamond]
