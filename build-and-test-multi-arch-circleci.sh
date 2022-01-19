@@ -1,6 +1,6 @@
 #! /bin/bash -e
 
-TARGET_IMAGE=microservicesio/plantuml:test-build-${CIRCLE_SHA1:-local}
+TARGET_IMAGE=microservicesio/plantuml:test-build-${CIRCLE_SHA1?}
 
 docker login -u ${DOCKER_USER_ID?} -p ${DOCKER_PASSWORD?}
 
