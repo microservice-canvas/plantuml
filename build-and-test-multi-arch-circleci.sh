@@ -29,6 +29,6 @@ docker run -i --rm --net=none -e PLANTUML_OPTIONS $TARGET_IMAGE < example-diagra
 
 file example-pngs/example-diagram.png
 
-docker run -i --rm --net=none -e PLANTUML_OPTIONS $TAG < example-diagrams/example-dot.txt > example-pngs/example-dot.png
+docker run -i --rm --net=none -e PLANTUML_OPTIONS $TARGET_IMAGE < example-diagrams/example-dot.txt > example-pngs/example-dot.png
 
 file example-pngs/example-dot.png
