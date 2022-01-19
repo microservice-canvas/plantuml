@@ -27,4 +27,8 @@ docker run -i --rm --net=none -e PLANTUML_OPTIONS $TAG < example-diagrams/exampl
 
 file example-pngs/example-diagram.png
 
+docker run -i --rm --net=none -e PLANTUML_OPTIONS $TAG < example-diagrams/example-dot.txt > example-pngs/example-dot.png
+
+file example-pngs/example-dot.png
+
 # docker-compose down
