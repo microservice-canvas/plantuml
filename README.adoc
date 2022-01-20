@@ -12,5 +12,5 @@ For example, in a Makefile you can write:
   asciidoctor -r asciidoctor-pdf -b pdf -o $@ $<
 
 %.png : %.txt
-   docker run -i --rm --net=none microservicesio/plantuml:0.2.0.RELEASE < $< > $@
+   docker run -i --rm --net=none microservicesio/plantuml:0.3.0.RELEASE < $< > $@
 ```
