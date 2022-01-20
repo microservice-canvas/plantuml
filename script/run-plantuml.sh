@@ -4,7 +4,7 @@ TMP_PNG=$(mktemp /tmp/output.png.XXXX)
 
 echo "${TMP_PNG}"
 
-VERSION=0.2.0.RELEASE
+VERSION=0.3.0.RELEASE
 
 if [ "$1" == "--version" ] ; then
     shift
