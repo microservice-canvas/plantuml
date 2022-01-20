@@ -29,8 +29,6 @@ jobs:
     working_directory: ~/plantuml
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.11
       - run:
           command: ./deploy-artifacts.sh
 workflows:
