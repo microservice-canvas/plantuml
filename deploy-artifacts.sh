@@ -23,6 +23,6 @@ SRC_TAG=test-build-${CIRCLE_SHA1?}
 echo Retagging $SRC_TAG $TARGET_IMAGE
 
 SOURCES=$(docker manifest inspect docker.io/microservicesio/plantuml:${SRC_TAG} | \
-   jq -r '.manifests[].digest' | xargs -n1 -I XYZ echo microservicesio/plantuml@XYZ))
+   jq -r '.manifests[].digest' | xargs -n1 -I XYZ echo microservicesio/plantuml@XYZ)
 
 docker buildx imagetools create -t ${TARGET_IMAGE} $SOURCES
