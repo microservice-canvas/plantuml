@@ -16,11 +16,6 @@ jobs:
             ./build-and-push-multi-arch-circleci.sh
       - run: ./test-multi-arch-circleci.sh
       - run: ./build-and-test-docker.sh
-      - run:
-          name: Publish artifacts
-          command: |
-            TERM=dumb ./deploy-artifacts.sh
-          when: on_success
   test-arm64:
     machine:
       image: ubuntu-2004:202101-01
@@ -29,6 +24,16 @@ jobs:
     steps:
       - checkout
       - run: ./test-multi-arch-circleci.sh
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    working_directory: ~/plantuml
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.11
+      - run:
+          command: ./deploy-artifacts.sh
 workflows:
   version: 2.1
   build-test-and-deploy:
@@ -37,3 +42,6 @@ workflows:
       - test-arm64:
           requires:
             - build
+      - deploy:
+          requires:
+            - test-arm64
