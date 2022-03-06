@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -13,10 +13,32 @@ jobs:
           command: |
             docker context create tls-env
             docker buildx create tls-env --use
-            ./build-and-test-multi-arch-circleci.sh
-      - run: ./build-and-test-docker.sh
+            ./build-and-push-multi-arch-circleci.sh
+      - run: ./test-multi-arch-circleci.sh
+  test-arm64:
+    machine:
+      image: ubuntu-2004:202101-01
+      resource_class: arm.medium
+    working_directory: ~/plantuml
+    steps:
+      - checkout
+      - run: ./test-multi-arch-circleci.sh
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    working_directory: ~/plantuml
+    steps:
+      - checkout
       - run:
-          name: Publish artifacts
-          command: |
-            TERM=dumb ./deploy-artifacts.sh
-          when: on_success
+          command: ./deploy-artifacts.sh
+workflows:
+  version: 2.1
+  build-test-and-deploy:
+    jobs:
+      - build
+      - test-arm64:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test-arm64
