@@ -1,8 +1,8 @@
 version: 2.1
 jobs:
   build:
-    machine:
-      image: ubuntu-2004:202101-01
+    docker:
+      - image: cimg/base:stable
     working_directory: ~/plantuml
     steps:
       - checkout
@@ -14,6 +14,12 @@ jobs:
             docker context create tls-env
             docker buildx create tls-env --use
             ./build-and-push-multi-arch-circleci.sh
+  test-intel:
+    machine:
+      image: ubuntu-2004:202101-01
+    working_directory: ~/plantuml
+    steps:
+      - checkout
       - run: ./test-multi-arch-circleci.sh
   test-arm64:
     machine:
@@ -36,9 +42,13 @@ workflows:
   build-test-and-deploy:
     jobs:
       - build
+      - test-intel:
+          requires:
+            - build
       - test-arm64:
           requires:
             - build
       - deploy:
           requires:
             - test-arm64
+            - test-intel
