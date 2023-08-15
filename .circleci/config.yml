@@ -41,7 +41,7 @@ workflows:
   version: 2.1
   build-test-and-deploy:
     jobs:
-      - build
+      - build:
           context:
             - publishing
       - test-intel:
