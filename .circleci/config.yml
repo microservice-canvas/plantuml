@@ -43,7 +43,7 @@ workflows:
     jobs:
       - build:
           context:
-            - publishing
+            - publish
       - test-intel:
           requires:
             - build
@@ -52,7 +52,7 @@ workflows:
             - build
       - deploy:
           context:
-            - publishing
+            - publish
           requires:
             - test-arm64
             - test-intel
