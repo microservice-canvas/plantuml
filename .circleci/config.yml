@@ -42,6 +42,8 @@ workflows:
   build-test-and-deploy:
     jobs:
       - build
+          context:
+            - publishing
       - test-intel:
           requires:
             - build
@@ -49,6 +51,8 @@ workflows:
           requires:
             - build
       - deploy:
+          context:
+            - publishing
           requires:
             - test-arm64
             - test-intel
