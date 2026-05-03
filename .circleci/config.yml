@@ -6,8 +6,7 @@ jobs:
     working_directory: ~/plantuml
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.11
+      - setup_remote_docker
       - run:
           name: docker buildx build
           command: |
@@ -16,15 +15,15 @@ jobs:
             ./build-and-push-multi-arch-circleci.sh
   test-intel:
     machine:
-      image: ubuntu-2004:202101-01
+      image: ubuntu-2404:2024.11.1
     working_directory: ~/plantuml
     steps:
       - checkout
       - run: ./test-multi-arch-circleci.sh
   test-arm64:
     machine:
-      image: ubuntu-2004:202101-01
-      resource_class: arm.medium
+      image: ubuntu-2404:2024.11.1
+    resource_class: arm.medium
     working_directory: ~/plantuml
     steps:
       - checkout
@@ -38,7 +37,6 @@ jobs:
       - run:
           command: ./deploy-artifacts.sh
 workflows:
-  version: 2.1
   build-test-and-deploy:
     jobs:
       - build:
