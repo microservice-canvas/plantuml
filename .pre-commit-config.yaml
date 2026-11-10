@@ -1,0 +1,12 @@
+# The hooks every project has, whatever its language.
+# Copy to .pre-commit-config.yaml, then run:
+#   pre-commit install
+default_install_hook_types: [pre-commit, commit-msg]
+repos:
+  - repo: https://github.com/cer/pre-commit-hooks
+    rev: v1.1.0
+    hooks:
+      - id: gitleaks-staged
+      - id: gitleaks-commit-message
+      - id: block-claude-coauthor
+      - id: shellcheck
